@@ -18,10 +18,15 @@ end
 
 def create
   @group =  Group.new(group_params)
-  @group.save
-
-  redirect_to groups_path
+  if @group.save
+    redirect_to groups_path
+  else
+    render :new
+  end
 end
+
+
+
 def update
   @group = Group.find(params[:id])
   @group.update(group_params)
@@ -36,7 +41,7 @@ def destroy
   @group.destroy
   flash[:alert] = "group deleted"
   redirect_to groups_path
-  
+
 end
 
 
