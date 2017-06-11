@@ -1,4 +1,7 @@
 class GroupsController < ApplicationController
+ before_action :authenticate_user!, only: [:new]
+ 
+
   def index
     @groups = Group.all
   end
@@ -29,7 +32,7 @@ end
 
 def update
   @group = Group.find(params[:id])
-  
+
   if @group.update(group_params)
     redirect_to groups_path, notice: "updated success"
   else
